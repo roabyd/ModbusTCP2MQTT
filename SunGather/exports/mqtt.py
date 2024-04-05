@@ -53,13 +53,13 @@ class export_mqtt(object):
     
         return True
 
-    def on_connect(self, client, userdata, flags, reason_code, properties):
+    def on_connect(self, client, userdata, flags, reason_code):
         logging.info(f"MQTT: Connected to {client._host}:{client._port}")
 
-    def on_disconnect(self, client, userdata, flags, reason_code, properties):
+    def on_disconnect(self, client, userdata, reason_code):
         logging.info(f"MQTT: Server Disconnected code: {reason_code}")
     
-    def on_publish(self, client, userdata, mid, reason_codes, properties):
+    def on_publish(self, client, userdata, mid):
         try:
             self.mqtt_queue.remove(mid)
         except Exception as err:
